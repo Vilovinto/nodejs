@@ -8,7 +8,7 @@ class UserService {
     public create(user: IUserDTO): Promise<IUser> {
         return userRepository.create(user)
     }
-    public getById(userId: string): Promise<IUserDTO> {
+    public getById(userId: string): Promise<IUser> {
         return userRepository.getById(userId)
     }
     public updateById(userId: string, user: IUserDTO): Promise<IUser> {
