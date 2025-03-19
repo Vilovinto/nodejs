@@ -1,5 +1,6 @@
-import {Router} from 'express'
-import {userRouter} from "./user_router";
+import { Router } from "express";
+
+import { userRouter } from "./user_router";
 
 const router = Router();
 

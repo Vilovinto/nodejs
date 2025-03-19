@@ -1,22 +1,22 @@
-import {User} from "../models/user_model";
-import {IUser, IUserDTO} from "../interfaces/user_interface";
+import { IUser, IUserDTO } from "../interfaces/user_interface";
+import { User } from "../models/user_model";
 
-class UserRepository{
-    public getAll(): Promise<IUser[]> {
-        return User.find()
-    }
-    public create(user: IUserDTO): Promise<IUser> {
-        return User.create(user)
-    }
-    public getById(userId: string): Promise<IUser> {
-        return User.findById(userId)
-    }
-    public updateById(userId: string, user: IUserDTO): Promise<IUser> {
-        return User.findByIdAndUpdate(userId, user, {new:true})
-    }
-    public deleteById(userId: string): Promise<IUser> {
-        return User.findByIdAndDelete(userId)
-    }
+class UserRepository {
+  public getAll(): Promise<IUser[]> {
+    return User.find();
+  }
+  public create(user: IUserDTO): Promise<IUser> {
+    return User.create(user);
+  }
+  public getById(userId: string): Promise<IUser> {
+    return User.findById(userId);
+  }
+  public updateById(userId: string, user: IUserDTO): Promise<IUser> {
+    return User.findByIdAndUpdate(userId, user, { new: true });
+  }
+  public deleteById(userId: string): Promise<IUser> {
+    return User.findByIdAndDelete(userId);
+  }
 }
 
 export const userRepository = new UserRepository();
