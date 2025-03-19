@@ -15,9 +15,8 @@ class UserController {
       const user = req.body as IUserDTO;
       const data = await userService.create(user);
       res.status(StatusCodesEnum.CREATED).json(data);
-    }
-    catch (e){
-      next(e)
+    } catch (e) {
+      next(e);
     }
   }
 
