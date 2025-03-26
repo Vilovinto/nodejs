@@ -12,4 +12,5 @@ class PasswordService {
     return bcrypt.compare(password, hashedPassword);
   }
 }
+
 export const passwordService = new PasswordService();

@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 import { IToken } from "../interfaces/token.interface";
-import { User } from "./user_model";
+import { User } from "./user.model";
 
 const tokenSchema = new Schema(
   {
@@ -12,4 +12,4 @@ const tokenSchema = new Schema(
   { timestamps: true, versionKey: false },
 );
 
-export const Token = model<IToken>("token", tokenSchema);
+export const Token = model<IToken>("tokens", tokenSchema);

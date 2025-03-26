@@ -4,8 +4,8 @@ import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 
 import { config } from "./configs/config";
-import { ApiError } from "./errors/api_error";
-import { apiRouter } from "./routers/api_router";
+import { ApiError } from "./errors/api.error";
+import { apiRouter } from "./routers/api.router";
 
 const app = express();
 app.use(express.json());
@@ -25,9 +25,9 @@ process.on("uncaughtException", (err) => {
   console.log("uncaughtException", err);
   process.exit(1);
 });
-
 const dbConnection = async () => {
   let dbCon = false;
+
   while (!dbCon) {
     try {
       console.log("Connecting to DB...");

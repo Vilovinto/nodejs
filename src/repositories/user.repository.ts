@@ -2,8 +2,8 @@ import {
   IUser,
   IUserCreateDTO,
   IUserUpdateDTO,
-} from "../interfaces/user_interface";
-import { User } from "../models/user_model";
+} from "../interfaces/user.interface";
+import { User } from "../models/user.model";
 
 class UserRepository {
   public getAll(): Promise<IUser[]> {
