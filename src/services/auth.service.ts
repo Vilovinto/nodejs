@@ -41,6 +41,10 @@ class AuthService {
       user.password,
     );
 
+    if (!user.isActive) {
+      throw new ApiError("Account is not active", StatusCodesEnum.FORBIDDEN);
+    }
+
     if (!isValidPassword) {
       throw new ApiError(
         "Invalid email or password",
