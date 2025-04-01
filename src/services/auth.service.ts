@@ -1,4 +1,7 @@
-import { templatesConstants } from "../constants/templates.constants";
+import { config } from "../configs/config";
+import { emailConstants } from "../constants/email.constants";
+import { ActionTokenTypeEnum } from "../enums/action-token-type.enum";
+import { EmailEnum } from "../enums/email.enum";
 import { StatusCodesEnum } from "../enums/status-codes.enum";
 import { ApiError } from "../errors/api.error";
 import { IAuth } from "../interfaces/auth.interface";
@@ -23,11 +26,14 @@ class AuthService {
       role: newUser.role,
     });
     await tokenRepository.create({ ...tokens, _userId: newUser._id });
+    const token = tokenService.generateActionToken(
+      { userId: newUser._id, role: newUser.role },
+      ActionTokenTypeEnum.ACTIVATE,
+    );
     await emailService.sendEmail(
       newUser.email,
-      "Welcome",
-      templatesConstants.WELCOME,
-      { name: newUser.name },
+      emailConstants[EmailEnum.ACTIVATE],
+      { name: newUser.name, url: `${config.FRONTEND_URL}/activate/${token}` },
     );
     return { user: newUser, tokens };
   }
@@ -66,6 +72,14 @@ class AuthService {
     });
     await tokenRepository.create({ ...tokens, _userId: user._id });
     return { user, tokens };
+  }
+
+  public async activate(token: string): Promise<IUser> {
+    const { userId } = tokenService.verifyToken(
+      token,
+      ActionTokenTypeEnum.ACTIVATE,
+    );
+    return await userService.updateById(userId, { isActive: true });
   }
 }
 

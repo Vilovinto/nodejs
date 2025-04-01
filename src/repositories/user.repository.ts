@@ -1,8 +1,4 @@
-import {
-  IUser,
-  IUserCreateDTO,
-  IUserUpdateDTO,
-} from "../interfaces/user.interface";
+import { IUser, IUserCreateDTO } from "../interfaces/user.interface";
 import { User } from "../models/user.model";
 
 class UserRepository {
@@ -15,7 +11,7 @@ class UserRepository {
   public getById(userId: string): Promise<IUser> {
     return User.findById(userId);
   }
-  public updateById(userId: string, user: IUserUpdateDTO): Promise<IUser> {
+  public updateById(userId: string, user: Partial<IUser>): Promise<IUser> {
     return User.findByIdAndUpdate(userId, user, { new: true });
   }
   public deleteById(userId: string): Promise<IUser> {
